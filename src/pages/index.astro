@@ -1,33 +1,81 @@
 ---
-import Layout from "../layouts/Layout.astro";
-
-import Hero from "../sections/Hero.astro";
-import Experience from "../sections/Experience.astro";
-import Section from "../components/Section.astro";
-import Briefcase from "../icons/Briefcase.astro";
-import Projects from "../sections/Projects.astro";
-import Code from "../icons/Code.astro";
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import Experience from '../components/Experience.astro';
+import About from '../components/About.astro';
+import Skills from '../components/Skills.astro';
+import Projects from '../components/Projects.astro';
+import Contact from '../components/Contact.astro';
 ---
 
-<Layout
-        title="Martín Giner Navarro | Desarrollador Web con 1 año de experiencia"
-        description="Contrata a Martín para crear tu aplicación web o móvil. Desarrollador Web. Especializado en crear aplicaciones.">
-    <Section id="Hero" class="pl-3 md:pl-0 py-12 md:py-36 scroll-m-20 w-full mx-auto lg:max-w-5xl">
-        <Hero/>
-    </Section>
-    <Section id="experiencia" class="px-3 md:px-0 pb-4 md:pb-24 scroll-m-20 w-full mx-auto lg:max-w-5xl">
-        <h2 class="mb-6 text-3xl font-semibold gap-x-3">
-            <Briefcase class="w-8 h-8 inline-block mb-2"/>
-            Experiencia laboral
-        </h2>
-        <Experience/>
-    </Section>
-    <Section id="proyectos" class="px-3 md:px-0 pb-4 md:pb-24 scroll-m-20 w-full mx-auto lg:max-w-5xl">
-        <h2 class="mb-6 text-3xl font-semibold gap-x-3">
-            <Code class="w-8 h-8 inline-block mb-2"/>
-            Proyectos
-        </h2>
-        <Projects/>
-    </Section>
+<Layout title="Martín Giner Navarro - Desarrollador Fullstack">
+  <div class="min-h-screen">
+    <Hero />
+    <About />
+    <Skills />
+    <Projects />
+    <Experience />
+    <Contact />
+  </div>
 </Layout>
 
+<style>
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes slide-down {
+    from {
+      opacity: 0;
+      transform: translateY(-30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes slide-up {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fade-in {
+    animation: fade-in 1s ease-out;
+  }
+
+  .animate-slide-down {
+    animation: slide-down 0.8s ease-out;
+  }
+
+  .animate-slide-up {
+    animation: slide-up 0.8s ease-out 0.2s backwards;
+  }
+
+  .animate-fade-in-delay {
+    animation: fade-in 1s ease-out 0.4s backwards;
+  }
+
+  .animate-fade-in-delay-2 {
+    animation: fade-in 1s ease-out 0.6s backwards;
+  }
+
+  .animate-fade-in-delay-3 {
+    animation: fade-in 1s ease-out 0.8s backwards;
+  }
+
+  .animate-fade-in-delay-4 {
+    animation: fade-in 1s ease-out 1s backwards;
+  }
+</style>
