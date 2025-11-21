@@ -1,0 +1,191 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 220 25% 8%;
+    --foreground: 210 40% 98%;
+
+    --card: 220 20% 12%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 220 20% 10%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 190 95% 50%;
+    --primary-foreground: 220 25% 8%;
+    --primary-glow: 190 100% 65%;
+
+    --secondary: 250 85% 60%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 220 15% 20%;
+    --muted-foreground: 215 20% 65%;
+
+    --accent: 160 95% 55%;
+    --accent-foreground: 220 25% 8%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 220 15% 18%;
+    --input: 220 15% 18%;
+    --ring: 190 95% 50%;
+
+    --radius: 0.75rem;
+
+    /* Custom portfolio colors */
+    --tech-blue: 220 90% 60%;
+    --tech-cyan: 190 95% 50%;
+    --tech-green: 160 95% 55%;
+    --tech-purple: 250 85% 60%;
+
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(190 95% 50%), hsl(250 85% 60%));
+    --gradient-accent: linear-gradient(135deg, hsl(160 95% 55%), hsl(190 95% 50%));
+    --gradient-glow: radial-gradient(circle at 50% 50%, hsl(190 95% 50% / 0.2), transparent 70%);
+
+    /* Shadows */
+    --shadow-glow: 0 0 40px hsl(190 95% 50% / 0.3);
+    --shadow-glow-strong: 0 0 60px hsl(190 95% 50% / 0.5), 0 0 100px hsl(250 85% 60% / 0.3);
+    --shadow-card: 0 8px 32px hsl(220 25% 8% / 0.5);
+
+    /* Glass effect */
+    --glass-bg: hsl(220 20% 12% / 0.6);
+    --glass-border: hsl(210 40% 98% / 0.1);
+
+    /* Transitions */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .light {
+    --background: 210 40% 98%;
+    --foreground: 220 25% 8%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 220 25% 8%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 25% 8%;
+
+    --primary: 190 95% 45%;
+    --primary-foreground: 210 40% 98%;
+    --primary-glow: 190 100% 55%;
+
+    --secondary: 250 85% 55%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 220 15% 95%;
+    --muted-foreground: 215 20% 45%;
+
+    --accent: 160 95% 45%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 84% 50%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 220 15% 88%;
+    --input: 220 15% 88%;
+    --ring: 190 95% 45%;
+
+    /* Custom portfolio colors for light mode */
+    --tech-blue: 220 90% 50%;
+    --tech-cyan: 190 95% 45%;
+    --tech-green: 160 95% 45%;
+    --tech-purple: 250 85% 55%;
+
+    /* Gradients for light mode */
+    --gradient-primary: linear-gradient(135deg, hsl(190 95% 45%), hsl(250 85% 55%));
+    --gradient-accent: linear-gradient(135deg, hsl(160 95% 45%), hsl(190 95% 45%));
+    --gradient-glow: radial-gradient(circle at 50% 50%, hsl(190 95% 45% / 0.15), transparent 70%);
+
+    /* Shadows for light mode */
+    --shadow-glow: 0 0 40px hsl(190 95% 45% / 0.2);
+    --shadow-glow-strong: 0 0 60px hsl(190 95% 45% / 0.4), 0 0 100px hsl(250 85% 55% / 0.2);
+    --shadow-card: 0 8px 32px hsl(220 25% 8% / 0.1);
+
+    /* Glass effect for light mode */
+    --glass-bg: hsl(0 0% 100% / 0.7);
+    --glass-border: hsl(220 25% 8% / 0.1);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    /* Use CSS variables so light/dark modes switch cleanly */
+    background: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-feature-settings: 'cv11', 'ss01';
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer utilities {
+  .glass-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--shadow-card);
+  }
+
+  .glow-text {
+    text-shadow: 0 0 20px hsl(var(--primary) / 0.5);
+  }
+
+  .glow-border {
+    box-shadow:
+      0 0 0 1px hsl(var(--primary) / 0.5),
+      0 0 20px hsl(var(--primary) / 0.3);
+  }
+
+  .animate-gradient {
+    background-size: 200% 200%;
+    animation: gradient 10s ease infinite;
+  }
+
+  @keyframes gradient {
+    0%,
+    100% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+  }
+
+  .animate-float {
+    animation: float 10s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-20px);
+    }
+  }
+
+  .animate-glow {
+    animation: glow 2s ease-in-out infinite alternate;
+  }
+
+  @keyframes glow {
+    from {
+      box-shadow: 0 0 20px hsl(var(--primary) / 0.3);
+    }
+    to {
+      box-shadow: var(--shadow-glow-strong);
+    }
+  }
+}

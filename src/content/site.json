@@ -1,0 +1,183 @@
+{
+  "siteTitle": "Martín Giner",
+  "description": "Desarrollador Full Stack creando experiencias web excepcionales con tecnologías modernas.",
+  "links": [
+    { "label": "Inicio", "href": "#hero" },
+    { "label": "Sobre mí", "href": "#about" },
+    { "label": "Proyectos", "href": "#projects" },
+    { "label": "Contacto", "href": "#contact" }
+  ],
+  "social": {
+    "github": "https://github.com/MartinGiner9",
+    "linkedin": "https://es.linkedin.com/in/martin-giner-navarro",
+    "email": "martinginernavarro7@gmail.com"
+  },
+
+  "about": {
+    "title": "Sobre Mí",
+    "intro": [
+      "Soy un desarrollador full stack apasionado por crear soluciones web innovadoras y funcionales. Me especializo en construir aplicaciones escalables y de alto rendimiento usando prácticas modernas y código mantenible.",
+      "Disfruto trabajando en todo el ciclo de producto: desde la arquitectura y backend hasta la experiencia de usuario en el frontend. Siempre priorizo la calidad, la accesibilidad y el rendimiento."
+    ],
+    "ctas": {
+      "cv": "/Martin_Giner_Navarro-CV.pdf",
+      "contact": "#contact"
+    },
+    "highlights": [
+      {
+        "icon": "code",
+        "title": "Clean Code",
+        "description": "Código limpio, escalable y mantenible"
+      },
+      {
+        "icon": "rocket",
+        "title": "Performance",
+        "description": "Optimización y mejores prácticas"
+      },
+      {
+        "icon": "heart",
+        "title": "UX First",
+        "description": "Experiencias centradas en el usuario"
+      }
+    ]
+  },
+
+  "experiences": [
+    {
+      "company": "Tragsatec",
+      "logo": "",
+      "location": "Murcia, Región de Murcia, España",
+      "roles": [
+        {
+          "title": "Analista Programador",
+          "period": "dic. 2024 - actualidad",
+          "startDate": "2024-12-01",
+          "actualidad": true,
+          "achievements": [
+            "Implementé un starter kit Spring Boot + Angular + Telosys que hoy usan muchos servicios → Time-to-market –35%.",
+            "Migré 4 apps críticas a Spring Boot 3 / Angular 17, recortando la latencia media de 4s a 1,7s.",
+            "Diseñé librerías de autenticación unificada (Apereo CAS) para ~3.000 usuarios/día, eliminando duplicidades.",
+            "Desarrollé versión automática de entidades y validación por checksum sobre +1M registros Oracle."
+          ]
+        },
+        {
+          "title": "Developer",
+          "period": "jul. 2023 - dic. 2024",
+          "startDate": "2023-07-01",
+          "endDate": "2024-12-01",
+          "duration": "1 año 6 meses",
+          "achievements": [
+            "Desarrollé y mantenía módulos Java + Angular que daban servicio a 3.000 usuarios diarios.",
+            "Contribuí a la migración y modernización de componentes críticos del backend y frontend."
+          ]
+        }
+      ]
+    },
+
+    {
+      "company": "Minderest",
+      "logo": "",
+      "location": "Murcia, Región de Murcia, España",
+      "roles": [
+        {
+          "title": "Developer (Prácticas)",
+          "type": "Contrato de prácticas",
+          "period": "mar. 2023 - jun. 2023",
+          "startDate": "2023-03-01",
+          "endDate": "2023-06-01",
+          "duration": "4 meses",
+          "description": "Durante mi periodo de prácticas en Minderest participé en el desarrollo Full Stack de soluciones para inteligencia de precios y surtido, trabajando con Symfony, MySQL y Vue.js.",
+          "achievements": [
+            "Contribuí al desarrollo de funcionalidades para monitorizar y comparar precios en grandes catálogos.",
+            "Aprendí y apliqué buenas prácticas de GitFlow y testing en entornos de producción."
+          ]
+        }
+      ]
+    },
+
+    {
+      "type": "education",
+      "title": "Grado en Ciencia de Datos Aplicada (Applied Data Science)",
+      "company": "Universitat Oberta de Catalunya",
+      "period": "Sep. 2024 - Actualidad",
+      "description": "Estudios de grado en Ciencia de Datos Aplicada enfocados en técnicas de análisis, machine learning y visualización de datos.",
+      "achievements": []
+    },
+
+    {
+      "type": "education",
+      "title": "Ciclo Formativo de Grado Superior — Desarrollo de aplicaciones web (bilingüe)",
+      "company": "IES José Planes",
+      "period": "sept. 2021 - jun. 2023",
+      "startDate": "2021-09-01",
+      "endDate": "2023-06-01",
+      "description": "Formación profesional en desarrollo de aplicaciones web. Tecnologías y lenguajes estudiados: JavaScript y PHP."
+    }
+  ],
+
+  "projects": [
+    {
+      "slug": "portfolio",
+      "title": "Portfolio Personal",
+      "description": "Portfolio profesional desarrollado con Astro y Tailwind CSS",
+      "technologies": ["Astro", "Tailwind CSS", "TypeScript"],
+      "image": "/proyectos/portfolio.webp",
+      "github": "https://github.com/MartinGiner9/portfolio",
+      "demo": "https://martinginer.vercel.app",
+      "order": 1
+    },
+    {
+      "slug": "ecommerce",
+      "title": "Gestor reservas restaurante",
+      "description": "Plataforma de reserva de mesa y pasarela de pago para restaurante, gestionada por turnos",
+      "image": "/proyectos/proyectoHosteleria.webp",
+      "technologies": ["Angular", "TypeScript", "Tailwind CSS", "Symfony"],
+      "order": 2
+    }
+  ],
+
+  "skillCategories": [
+    {
+      "icon": "layout",
+      "title": "Frontend",
+      "colorClass": "text-primary",
+      "skills": [
+        { "name": "Angular", "level": 90 },
+        { "name": "TypeScript", "level": 90 },
+        { "name": "Tailwind CSS", "level": 95 },
+        { "name": "HTML/CSS", "level": 98 }
+      ]
+    },
+    {
+      "icon": "server",
+      "title": "Backend",
+      "colorClass": "text-secondary",
+      "skills": [
+        { "name": "Spring boot", "level": 95 },
+        { "name": "Symfony", "level": 85 },
+        { "name": "REST APIs", "level": 92 },
+        { "name": "Microservicios", "level": 85 }
+      ]
+    },
+    {
+      "icon": "database",
+      "title": "Database",
+      "colorClass": "text-accent",
+      "skills": [
+        { "name": "Oracle", "level": 88 },
+        { "name": "MySql", "level": 90 },
+        { "name": "Redis", "level": 50 }
+      ]
+    },
+    {
+      "icon": "wrench",
+      "title": "DevOps & Tools",
+      "colorClass": "text-tech-purple",
+      "skills": [
+        { "name": "Git / GitHub", "level": 95 },
+        { "name": "Docker", "level": 85 },
+        { "name": "CI/CD", "level": 82 }
+      ]
+    }
+  ]
+}

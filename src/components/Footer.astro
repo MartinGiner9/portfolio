@@ -1,0 +1,77 @@
+---
+import site from '../content/site.json';
+import Code2 from './icons/Code2.astro';
+import GithubIcon from './icons/Github.astro';
+import LinkedinIcon from './icons/Linkedin.astro';
+import MailIcon from './icons/Mail.astro';
+import Heart from './icons/Heart.astro';
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="border-t border-border bg-card/50 backdrop-blur-sm">
+  <div class="container mx-auto px-4 py-12">
+    <div class="grid md:grid-cols-3 gap-8 mb-8">
+      <div>
+        <div class="flex items-center gap-2 text-primary font-bold text-xl mb-4">
+          <Code2 class="w-6 h-6" />
+          <span class="glow-text">{site.siteTitle}</span>
+        </div>
+        <p class="text-muted-foreground text-sm">{site.description}</p>
+      </div>
+
+      <div>
+        <h3 class="font-bold mb-4">Enlaces Rápidos</h3>
+        <ul class="space-y-2 text-sm text-muted-foreground">
+          {
+            site.links.map((link) => (
+              <li>
+                <a href={link.href} class="hover:text-primary transition-colors">
+                  {link.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="font-bold mb-4">Sígueme</h3>
+        <div class="flex gap-4">
+          <a
+            href={site.social.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="w-10 h-10 rounded-full glass-card flex items-center justify-center hover:glow-border transition-all hover:scale-110"
+          >
+            <GithubIcon class="w-5 h-5" />
+          </a>
+
+          <a
+            href={site.social.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="w-10 h-10 rounded-full glass-card flex items-center justify-center hover:glow-border transition-all hover:scale-110"
+          >
+            <LinkedinIcon class="w-5 h-5" />
+          </a>
+
+          <a
+            href={`mailto:${site.social.email}`}
+            class="w-10 h-10 rounded-full glass-card flex items-center justify-center hover:glow-border transition-all hover:scale-110"
+          >
+            <MailIcon class="w-5 h-5" />
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="pt-8 border-t border-border text-center text-sm text-muted-foreground">
+      <p class="flex items-center justify-center gap-2">
+        © {currentYear}
+        {site.siteTitle}. Hecho con
+        <Heart class="w-4 h-4 text-primary animate-pulse" />
+        y mucho código
+      </p>
+    </div>
+  </div>
+</footer>

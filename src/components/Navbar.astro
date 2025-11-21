@@ -1,0 +1,203 @@
+---
+import ThemeToggle from './ThemeToggle.astro';
+import Code2 from './icons/Code2.astro';
+import MenuIcon from './icons/Menu.astro';
+---
+
+<nav
+  id="site-navbar"
+  class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-transparent py-6"
+>
+  <div class="container mx-auto px-4 flex items-center justify-between">
+    <div class="flex items-center gap-2 text-primary font-bold text-xl">
+      <Code2 class="w-6 h-6" />
+      <span class="glow-text">Martín Giner</span>
+    </div>
+
+    <!-- Desktop Menu -->
+    <ul id="navbar-desktop" class="hidden md:flex items-center gap-8">
+      <li>
+        <button
+          data-href="#hero"
+          class="nav-link text-foreground hover:text-primary transition-colors relative group"
+          >Inicio<span class="underline"></span></button
+        >
+      </li>
+      <li>
+        <button
+          data-href="#about"
+          class="nav-link text-foreground hover:text-primary transition-colors relative group"
+          >Sobre mí<span class="underline"></span></button
+        >
+      </li>
+      <li>
+        <button
+          data-href="#skills"
+          class="nav-link text-foreground hover:text-primary transition-colors relative group"
+          >Skills<span class="underline"></span></button
+        >
+      </li>
+      <li>
+        <button
+          data-href="#projects"
+          class="nav-link text-foreground hover:text-primary transition-colors relative group"
+          >Proyectos<span class="underline"></span></button
+        >
+      </li>
+      <li>
+        <button
+          data-href="#experience"
+          class="nav-link text-foreground hover:text-primary transition-colors relative group"
+          >Experiencia<span class="underline"></span></button
+        >
+      </li>
+      <li>
+        <button
+          data-href="#contact"
+          class="nav-link text-foreground hover:text-primary transition-colors relative group"
+          >Contacto<span class="underline"></span></button
+        >
+      </li>
+    </ul>
+
+    <div class="hidden md:flex items-center gap-3">
+      <ThemeToggle />
+      <button
+        id="contact-desktop"
+        class="bg-primary text-primary-foreground hover:bg-primary/90 glow-border px-4 py-2 rounded-md"
+        >Contáctame</button
+      >
+    </div>
+
+    <!-- Mobile Menu Button -->
+    <div class="md:hidden flex items-center gap-2">
+      <ThemeToggle />
+      <button id="mobile-toggle" class="text-foreground p-2 rounded-md">
+        <MenuIcon id="mobile-menu-icon" class="w-6 h-6" />
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Menu (hidden by default) -->
+  <div
+    id="mobile-menu"
+    class="hidden md:hidden glass-card mt-4 mx-4 p-6 rounded-lg animate-fade-in"
+  >
+    <ul class="flex flex-col gap-4">
+      <li>
+        <button
+          data-href="#hero"
+          class="mobile-nav-link text-foreground hover:text-primary transition-colors w-full text-left"
+          >Inicio</button
+        >
+      </li>
+      <li>
+        <button
+          data-href="#about"
+          class="mobile-nav-link text-foreground hover:text-primary transition-colors w-full text-left"
+          >Sobre mí</button
+        >
+      </li>
+      <li>
+        <button
+          data-href="#skills"
+          class="mobile-nav-link text-foreground hover:text-primary transition-colors w-full text-left"
+          >Skills</button
+        >
+      </li>
+      <li>
+        <button
+          data-href="#projects"
+          class="mobile-nav-link text-foreground hover:text-primary transition-colors w-full text-left"
+          >Proyectos</button
+        >
+      </li>
+      <li>
+        <button
+          data-href="#experience"
+          class="mobile-nav-link text-foreground hover:text-primary transition-colors w-full text-left"
+          >Experiencia</button
+        >
+      </li>
+      <li>
+        <button
+          data-href="#contact"
+          class="mobile-nav-link text-foreground hover:text-primary transition-colors w-full text-left"
+          >Contacto</button
+        >
+      </li>
+      <li>
+        <button
+          id="contact-mobile"
+          class="w-full bg-primary text-primary-foreground px-4 py-2 rounded-md">Contáctame</button
+        >
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<script>
+  (function () {
+    const navbar = document.getElementById('site-navbar');
+    const mobileToggle = document.getElementById('mobile-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const mobileMenuIcon = document.getElementById('mobile-menu-icon');
+    const desktopLinks = Array.from(document.querySelectorAll('.nav-link'));
+    const mobileLinks = Array.from(document.querySelectorAll('.mobile-nav-link'));
+    const contactDesktop = document.getElementById('contact-desktop');
+    const contactMobile = document.getElementById('contact-mobile');
+
+    let isMenuOpen = false;
+
+    function setScrolled(scrolled: boolean) {
+      if (scrolled) {
+        navbar.classList.add('glass-card', 'py-4');
+        navbar.classList.remove('bg-transparent', 'py-6');
+      } else {
+        navbar.classList.remove('glass-card', 'py-4');
+        navbar.classList.add('bg-transparent', 'py-6');
+      }
+    }
+
+    function onScroll() {
+      setScrolled(window.scrollY > 50);
+    }
+
+    window.addEventListener('scroll', onScroll);
+    onScroll();
+
+    function scrollToHref(href: string | null) {
+      if (!href) return;
+      const el = document.querySelector(href);
+      el && el.scrollIntoView({ behavior: 'smooth' });
+      if (isMenuOpen) toggleMobileMenu();
+    }
+
+    desktopLinks.forEach((btn) =>
+      btn.addEventListener('click', () => scrollToHref(btn.getAttribute('data-href')))
+    );
+    mobileLinks.forEach((btn) =>
+      btn.addEventListener('click', () => scrollToHref(btn.getAttribute('data-href')))
+    );
+
+    if (contactDesktop) contactDesktop.addEventListener('click', () => scrollToHref('#contact'));
+    if (contactMobile) contactMobile.addEventListener('click', () => scrollToHref('#contact'));
+
+    function toggleMobileMenu() {
+      isMenuOpen = !isMenuOpen;
+      if (isMenuOpen) {
+        mobileMenu.classList.remove('hidden');
+        // change icon to X
+        mobileMenuIcon.innerHTML =
+          '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />';
+      } else {
+        mobileMenu.classList.add('hidden');
+        // change icon to menu
+        mobileMenuIcon.innerHTML =
+          '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />';
+      }
+    }
+
+    mobileToggle && mobileToggle.addEventListener('click', toggleMobileMenu);
+  })();
+</script>

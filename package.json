@@ -1,5 +1,5 @@
 {
-  "name": "porfolio",
+  "name": "portfolio-v2",
   "type": "module",
   "version": "0.0.1",
   "scripts": {
@@ -7,17 +7,28 @@
     "start": "astro dev",
     "build": "astro check && astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "format": "prettier --write \"**/*.{js,ts,astro,css,json,md}\"",
+    "lint": "eslint \"src/**/*.{js,ts,astro}\" --max-warnings=0",
+    "lint:fix": "eslint \"src/**/*.{js,ts,astro}\" --fix"
   },
   "dependencies": {
-    "@astrojs/check": "^0.5.10",
     "@astrojs/tailwind": "^5.1.0",
-    "@astrojs/vercel": "^7.5.3",
-    "@midudev/tailwind-animations": "^0.0.7",
-    "@vercel/analytics": "^1.2.2",
-    "@vercel/speed-insights": "^1.0.10",
-    "astro": "^4.6.1",
-    "tailwindcss": "^3.4.3",
-    "typescript": "^5.4.5"
+    "astro": "5.16.0",
+    "resend": "^6.5.2",
+    "tailwindcss": "^3.4.0"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.0",
+    "@astrojs/node": "^9.5.1",
+    "@typescript-eslint/eslint-plugin": "^8.47.0",
+    "@typescript-eslint/parser": "^8.47.0",
+    "astro-eslint-parser": "^1.2.2",
+    "eslint": "^9.39.1",
+    "eslint-plugin-astro": "^1.5.0",
+    "prettier": "^3.6.2",
+    "prettier-plugin-astro": "^0.14.1",
+    "tailwindcss-animate": "^1.0.0",
+    "typescript": "^5.5.0"
   }
 }
