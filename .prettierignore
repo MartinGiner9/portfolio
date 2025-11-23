@@ -1,0 +1,10 @@
+node_modules
+dist
+.build
+pnpm-lock.yaml
+package-lock.json
+.vscode
+.env
+.env.*
+public/assets/**.map
+

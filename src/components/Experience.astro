@@ -1,0 +1,168 @@
+---
+import BriefcaseIcon from './icons/Briefcase.astro';
+import GraduationCapIcon from './icons/GraduationCap.astro';
+import site from '../content/site.json';
+import { getRoleDuration } from '../lib/dates';
+
+const experiences = site.experiences || [];
+---
+
+<section id="experience" class="py-20 relative">
+  <div class="container mx-auto px-4">
+    <div class="max-w-4xl mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl md:text-5xl font-bold mb-4 glow-text">Experiencia & Educación</h2>
+        <div class="w-20 h-1 bg-gradient-to-r from-primary to-secondary mx-auto mb-4"></div>
+        <p class="text-muted-foreground text-lg">Mi trayectoria profesional y académica</p>
+      </div>
+
+      <div class="relative">
+        {/* Línea del timeline */}
+        <div
+          class="absolute left-8 md:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary via-secondary to-accent"
+        >
+        </div>
+
+        <div class="space-y-12">
+          {
+            experiences.map((exp, index) => (
+              <div
+                class={`timeline-item relative flex items-start gap-8 ${
+                  index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
+                } animate-fade-in`}
+                data-index={index}
+                style={`animation-delay: ${index * 0.2}s`}
+              >
+                {/* Icono */}
+                <div class="timeline-icon absolute left-8 md:left-1/2 -translate-x-1/2 w-16 h-16 rounded-full glass-card flex items-center justify-center glow-border z-10">
+                  {exp.roles ? (
+                    <BriefcaseIcon class="w-7 h-7 text-primary" />
+                  ) : exp.type === 'work' ? (
+                    <BriefcaseIcon class="w-7 h-7 text-primary" />
+                  ) : (
+                    <GraduationCapIcon class="w-7 h-7 text-secondary" />
+                  )}
+                </div>
+
+                {/* Contenido */}
+                <div class={`flex-1 ${index % 2 === 0 ? 'md:pr-12' : 'md:pl-12 pl-20'}`}>
+                  <div class="timeline-card glass-card p-6 rounded-2xl hover:glow-border transition-all max-w-md">
+                    {exp.roles ? (
+                      <>
+                        {/* Cabecera empresa + ubicación */}
+                        <div
+                          class={`mb-4 text-left ${
+                            index % 2 === 0
+                              ? 'ml-12 md:text-left md:ml-0'
+                              : 'md:text-right md:pl-10'
+                          }`}
+                        >
+                          <h3 class="text-xl font-bold mt-0 mb-1">{exp.company}</h3>
+                          {exp.location && (
+                            <p class="text-muted-foreground font-medium mb-4">{exp.location}</p>
+                          )}
+                        </div>
+
+                        {/* Roles dentro de la empresa */}
+                        {exp.roles.map((role: any) => (
+                          <div class="mb-6">
+                            <div class="flex flex-wrap items-center justify-between gap-2">
+                              <h4 class="text-lg font-semibold">{role.title}</h4>
+                              <span class="text-sm text-muted-foreground">
+                                {role.period}{' '}
+                                {getRoleDuration(role) ? ' · ' + getRoleDuration(role) : ''}
+                              </span>
+                            </div>
+
+                            {role.type && (
+                              <p class="text-sm text-muted-foreground mb-2">{role.type}</p>
+                            )}
+
+                            {role.description && (
+                              <p class="text-sm text-muted-foreground mb-2">{role.description}</p>
+                            )}
+
+                            {role.achievements && (
+                              <ul class="mt-2 space-y-2 text-sm">
+                                {role.achievements.map((a: any) => (
+                                   <li class="flex items-start gap-2">
+                                     <span class="text-primary mt-1">•</span>
+                                     <span class="text-muted-foreground">{a}</span>
+                                   </li>
+                                 ))}
+                              </ul>
+                            )}
+                          </div>
+                        ))}
+                      </>
+                    ) : (
+                      <>
+                        <div
+                          class={`mb-4 text-left ${index % 2 === 0 ? 'ml-12 md:text-left md:ml-0' : 'md:text-right md:pl-10'}`}
+                        >
+                          <span class="text-sm text-primary font-semibold">{exp.period}</span>
+                        </div>
+                        <h3 class="text-xl font-bold mt-2 mb-1">{exp.title}</h3>
+                        <p class="text-muted-foreground font-medium mb-3">{exp.company}</p>
+                        <p class="text-sm text-muted-foreground mb-4">{exp.description}</p>
+                        <ul class={`space-y-2 text-sm ${index % 2 === 0 ? 'md:text-right' : ''}`}>
+                          {exp.achievements?.map((achievement: any) => (
+                             <li class="flex items-start gap-2">
+                               <span class="text-primary mt-1">•</span>
+                               <span class="text-muted-foreground">{achievement}</span>
+                             </li>
+                           ))}
+                         </ul>
+                      </>
+                    )}
+                  </div>
+                </div>
+
+                {/* Espaciador para escritorio */}
+                <div class="hidden md:block flex-1" />
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // IntersectionObserver para animar y aplicar glow a las cards del timeline
+    (function () {
+      function init() {
+        const items = Array.from(document.querySelectorAll('.timeline-item'));
+        if (!items.length) return;
+
+        const options = {
+          root: null,
+          rootMargin: '0px',
+          threshold: 0.25,
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            const el = entry.target;
+            const card = el.querySelector('.timeline-card');
+            if (entry.isIntersecting) {
+              el.classList.add('is-visible');
+              if (card) card.classList.add('glow-border');
+            } else {
+              el.classList.remove('is-visible');
+              if (card) card.classList.remove('glow-border');
+            }
+          });
+        }, options);
+
+        items.forEach((i) => observer.observe(i));
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
+    })();
+  </script>
+</section>

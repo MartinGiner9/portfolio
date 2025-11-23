@@ -1,75 +1,95 @@
 ---
-import Header from "../sections/Header.astro"
-import Footer from "../sections/Footer.astro"
-import {ViewTransitions} from "astro:transitions"
-import SpeedInsights from "@vercel/speed-insights/astro"
-
-
 interface Props {
-    title: string
-    description: string
+  title: string;
+  description?: string;
 }
 
-const {description, title} = Astro.props
+const { title, description = 'Desarrollador Fullstack especializado en Angular y Spring Boot' } =
+  Astro.props;
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/index.css';
+import '../styles/app.css';
 ---
-<!doctype html>
-<html lang="es" style="background-color: rgb(3 7 18);">
-<head>
-    <meta charset="UTF-8"/>
-    <meta name="description" content={description}/>
-    <meta name="viewport" content="width=device-width"/>
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
-    <meta name="generator" content={Astro.generator}/>
-    <link rel="canonical" href="https://martinginer.com/">
-    <meta property="og:description" content="Contrata a Martín para crear tu aplicación web o móvil. Desarrollador Web. Especializado en crear aplicaciones."/>
-    <meta property="og:title" content="Porfolio de Martin Giner Navarro"/>
-    <meta property="og:image" content="https://martinginer.com/MartinGiner-4-3.webp" />
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:site" content="@usuario_de_twitter">
-    <meta name="twitter:title" content="Martín Giner Navarro - Desarrollador y Programador Web con 1 año de experiencia">
-    <meta name="twitter:description" content="Contrata a Martín para crear tu aplicación web o móvil. Desarrollador Web especializado en la creación de aplicaciones.">
-    <meta name="twitter:image" content="https://martinginer.com/MartinGiner-4-3.webp">
-    <title>{title}</title>
-    <ViewTransitions/>
-    <SpeedInsights/>
-    <script type="application/ld+json">
-    {
-      "@context": "http://schema.org",
-      "@type": "Person",
-      "name": "Martín Giner Navarro",
-      "jobTitle": "Desarrollador Web",
-      "experience": "1 año",
-      "url": "https://martinginer.com/",
-      "skills": "HTML, CSS, JavaScript, PHP, Java, Groovy",
-      "memberOf": {
-        "@type": "Organization",
-        "name": "Tragsa"
-      },
-      "sameAs": [
-        "www.linkedin.com/in/martin-giner-navarro"
-      ]
-    }
-    </script>
-</head>
-<body class="relative text-white">
-<div
-        class="absolute top-0 bottom-0 z-[-2] min-h-screen w-full  bg-gray-950
-      bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(119,176,198,0.3),rgba(255,255,255,0))] "
->
-</div>
-<Header/>
-<slot/>
-<Footer/>
-<style is:global>
-    :root {
-        color-scheme: light dark;
-        --color-primary: #77b0c680;
-        --color-secondary: #C68D77;
-    }
 
-    * {
-        caret-color: transparent;
-    }
-</style>
-</body>
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content={description} />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
+    <meta name="keywords" content="desarrollador fullstack, angular, spring boot, java, typescript, portfolio, martin giner" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={Astro.url} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL('/MartinGiner.webp', Astro.site)} />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={Astro.url} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={new URL('/MartinGiner.webp', Astro.site)} />
+
+    <!-- Tema inicial: aplicar antes de render para evitar FOUC -->
+    <script>
+      (function () {
+        try {
+          const saved = localStorage.getItem('theme');
+          // If user explicitly saved 'light', enable light mode. Otherwise default to dark (no .light class).
+          if (saved === 'light') {
+            document.documentElement.classList.add('light');
+          } else {
+            document.documentElement.classList.remove('light');
+          }
+        } catch (e) {
+          // ignore
+        }
+      })();
+    </script>
+  </head>
+  <body class="min-h-screen">
+    <Navbar />
+
+    <main class="pt-16">
+      <slot />
+    </main>
+
+    <Footer />
+  </body>
 </html>
+
+<style is:global>
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    font-family:
+      system-ui,
+      -apple-system,
+      BlinkMacSystemFont,
+      'Segoe UI',
+      Roboto,
+      Oxygen,
+      Ubuntu,
+      Cantarell,
+      'Open Sans',
+      'Helvetica Neue',
+      sans-serif;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    line-height: 1.6;
+  }
+</style>

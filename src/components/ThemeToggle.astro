@@ -1,0 +1,91 @@
+---
+import SunIcon from './icons/Sun.astro';
+import MoonIcon from './icons/Moon.astro';
+---
+
+<button
+  class="theme-toggle p-2 rounded-md bg-transparent hover:bg-background/30 transition-colors"
+  aria-label="Toggle theme"
+>
+  <!-- Sun Icon (hidden por defecto) -->
+  <span class="theme-sun hidden"><SunIcon class="w-5 h-5 text-yellow-400" /></span>
+  <!-- Moon Icon (visible por defecto) -->
+  <span class="theme-moon"><MoonIcon class="w-5 h-5 text-muted-foreground" /></span>
+</button>
+
+<script>
+  // Idempotent initializer for theme toggles (supports multiple buttons)
+  (function () {
+    const win = window as any;
+    if (win.__themeToggleInitialized) return;
+    win.__themeToggleInitialized = true;
+
+    function updateButton(btn: Element) {
+      const isLight =
+        document.documentElement.classList.contains('light') ||
+        localStorage.getItem('theme') === 'light';
+      
+      const sun = btn.querySelector('.theme-sun');
+      const moon = btn.querySelector('.theme-moon');
+      
+      if (!sun || !moon) return;
+      
+      if (isLight) {
+        sun.classList.remove('hidden');
+        moon.classList.add('hidden');
+      } else {
+        sun.classList.add('hidden');
+        moon.classList.remove('hidden');
+      }
+    }
+
+    function updateAllButtons() {
+      document.querySelectorAll('.theme-toggle').forEach(updateButton);
+    }
+
+    function initTheme() {
+      try {
+        const saved = localStorage.getItem('theme');
+        if (saved === 'light') document.documentElement.classList.add('light');
+        else document.documentElement.classList.remove('light');
+      } catch (e) {
+        // ignore
+      }
+      updateAllButtons();
+    }
+
+    function setupButtons() {
+      document.querySelectorAll('.theme-toggle').forEach((btn) => {
+        const button = btn as HTMLElement & { __themeBound?: boolean };
+        // avoid double-binding
+        if (button.__themeBound) return;
+        button.__themeBound = true;
+        
+        button.addEventListener('click', () => {
+          const isLightNow = document.documentElement.classList.toggle('light');
+          try {
+            localStorage.setItem('theme', isLightNow ? 'light' : 'dark');
+          } catch (e) {}
+          updateAllButtons();
+        });
+      });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', () => {
+        initTheme();
+        setupButtons();
+      });
+    } else {
+      initTheme();
+      setupButtons();
+    }
+
+    // Sync across tabs
+    window.addEventListener('storage', (e) => {
+      if (e.key === 'theme') {
+        initTheme();
+      }
+    });
+  })();
+</script>

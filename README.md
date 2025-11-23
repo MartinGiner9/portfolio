@@ -1,14 +1,8 @@
-# Mi Porfolio
+# Portfolio Personal - Martín Giner
 
-Bienvenido a mi porfolio en GitHub. Aquí encontrarás una colección de mis proyectos, mi experiencia y más sobre mí.
-
-## Acerca de mí
-
-Soy Martín Giner Navarro, un programador con experiencia en Angular, Symfony, Vercel y Vue. Me apasiona el mundo de la programación.
+Portfolio personal profesional desarrollado con Astro y Tailwind CSS, con diseño dark mode limpio y moderno.
 
 
-## Contacto
+## 📝 Licencia
 
-Puedes encontrarme en [LinkedIn](https://es.linkedin.com/in/martin-giner-navarro) o [enviarme un correo electrónico](martinginernavarro7@gmail.com) para hablar sobre colaboraciones, oportunidades laborales o cualquier otra consulta.
-
-¡Gracias por visitar mi porfolio!
+Proyecto personal - © 2025 Martín Giner

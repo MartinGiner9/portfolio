@@ -1,0 +1,196 @@
+---
+import MailIcon from './icons/Mail.astro';
+import MapPinIcon from './icons/MapPin.astro';
+---
+
+<section id="contact" class="py-20 relative">
+  <div class="container mx-auto px-4">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl md:text-5xl font-bold mb-4 glow-text">Trabajemos Juntos</h2>
+        <div class="w-20 h-1 bg-gradient-to-r from-primary to-secondary mx-auto mb-4"></div>
+        <p class="text-muted-foreground text-lg">¿Tienes un proyecto en mente? ¡Hablemos!</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-12">
+        <div class="space-y-8 animate-slide-in-left">
+          <div>
+            <h3 class="text-2xl font-bold mb-6">Información de Contacto</h3>
+            <div class="space-y-4">
+              <a
+                href="mailto:martinginernavarro7@gmail.com"
+                class="glass-card p-4 rounded-xl flex items-center gap-4 hover:glow-border transition-all"
+              >
+                <div
+                  class="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center"
+                >
+                  <MailIcon class="w-5 h-5 text-background" />
+                </div>
+                <div>
+                  <p class="text-sm text-muted-foreground">Email</p>
+                  <p class="font-medium">martinginernavarro7@gmail.com</p>
+                </div>
+              </a>
+              <a
+                href="#"
+                class="glass-card p-4 rounded-xl flex items-center gap-4 hover:glow-border transition-all"
+              >
+                <div
+                  class="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center"
+                >
+                  <MapPinIcon class="w-5 h-5 text-background" />
+                </div>
+                <div>
+                  <p class="text-sm text-muted-foreground">Ubicación</p>
+                  <p class="font-medium">Murcia, España</p>
+                </div>
+              </a>
+            </div>
+          </div>
+
+          <div class="glass-card p-8 rounded-2xl">
+            <h4 class="text-xl font-bold mb-4">¿Por qué trabajar conmigo?</h4>
+            <ul class="space-y-3 text-muted-foreground">
+              <li class="flex items-start gap-2">
+                <span class="text-primary mt-1">✓</span><span>Código limpio y bien documentado</span
+                >
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-primary mt-1">✓</span><span>Comunicación clara y constante</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-primary mt-1">✓</span><span>Entrega a tiempo y con calidad</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-primary mt-1">✓</span><span>Soporte post-lanzamiento</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Contact Form -->
+        <div class="animate-slide-in-right">
+          <form id="contact-form" class="glass-card p-8 rounded-2xl space-y-6" method="post">
+            <!-- Honeypot field: keep it hidden from users, bots tend to fill it -->
+            <label for="_honey" class="sr-only">If you are a human, leave this field empty</label>
+            <input
+              id="_honey"
+              type="text"
+              name="_honey"
+              style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;"
+              tabindex="-1"
+              autocomplete="off"
+            />
+            <div>
+              <label for="name" class="block text-sm font-medium mb-2">Nombre</label>
+              <input
+                id="name"
+                name="name"
+                type="text"
+                required
+                class="w-full p-3 bg-background/50 border-border rounded-md"
+                placeholder="Tu nombre completo"
+              />
+            </div>
+
+            <div>
+              <label for="email" class="block text-sm font-medium mb-2">Email</label>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                required
+                class="w-full p-3 bg-background/50 border-border rounded-md"
+                placeholder="example@email.com"
+              />
+            </div>
+
+            <div>
+              <label for="message" class="block text-sm font-medium mb-2">Mensaje</label>
+              <textarea
+                id="message"
+                name="message"
+                required
+                rows="6"
+                class="w-full p-3 bg-background/50 border-border rounded-md resize-none min-h-[150px]"
+                placeholder="Cuéntame sobre tu proyecto..."></textarea>
+            </div>
+
+            <button
+              id="submit-btn"
+              type="submit"
+              class="w-full px-6 py-3 bg-primary text-primary-foreground rounded-md"
+              >Enviar Mensaje</button
+            >
+
+            <div id="contact-toast" aria-live="polite" class="sr-only"></div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" is:inline>
+    const form = document.getElementById('contact-form');
+    const btn = document.getElementById('submit-btn');
+    const toastEl = document.getElementById('contact-toast');
+
+    function showToast(message, isError = false) {
+      // pequeña notificación accesible (visualmente se puede mejorar con clases)
+      toastEl.textContent = message;
+      toastEl.className = isError ? 'text-red-500' : 'text-green-500';
+      toastEl.classList.remove('sr-only');
+      setTimeout(() => {
+        toastEl.classList.add('sr-only');
+      }, 8000);
+    }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      // Honeypot check: if filled, treat as spam and abort
+      const honey = form.querySelector('input[name="_honey"]');
+      if (honey && honey.value.trim() !== '') {
+        return;
+      }
+
+      const data = {
+        name: form.name.value.trim(),
+        email: form.email.value.trim(),
+        message: form.message.value.trim(),
+      };
+
+      if (!data.name || !data.email || !data.message) {
+        showToast('Por favor completa todos los campos.', true);
+        return;
+      }
+
+      btn.disabled = true;
+      const originalText = btn.textContent;
+      btn.textContent = 'Enviando...';
+
+      try {
+        // Enviar al endpoint interno /api/contact que usa Resend
+        const res = await fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+        });
+
+        const body = await res.json().catch(() => ({}));
+
+        if (res.ok && body.success) {
+          showToast('¡Mensaje enviado! Me pondré en contacto pronto.');
+          form.reset();
+        } else {
+          showToast(body.error || 'Error al enviar el mensaje.', true);
+        }
+      } catch (err) {
+        showToast('Error de red. Intenta de nuevo más tarde.', true);
+      } finally {
+        btn.disabled = false;
+        btn.textContent = originalText;
+      }
+    });
+  </script>
+</section>
