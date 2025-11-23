@@ -13,6 +13,7 @@
     "lint:fix": "eslint \"src/**/*.{js,ts,astro}\" --fix"
   },
   "dependencies": {
+    "@astrojs/sitemap": "^3.6.0",
     "@astrojs/tailwind": "^5.1.0",
     "astro": "5.16.0",
     "resend": "^6.5.2",
