@@ -16,22 +16,20 @@ import MoonIcon from './icons/Moon.astro';
 <script>
   // Idempotent initializer for theme toggles (supports multiple buttons)
   (function () {
-    if (window.__themeToggleInitialized) return;
-    window.__themeToggleInitialized = true;
+    const win = window as any;
+    if (win.__themeToggleInitialized) return;
+    win.__themeToggleInitialized = true;
 
-    /**
-     * Actualiza el estado visual de un botón de tema.
-     * @param {HTMLElement} btn
-     */
-    function updateButton(btn) {
+    function updateButton(btn: Element) {
       const isLight =
         document.documentElement.classList.contains('light') ||
         localStorage.getItem('theme') === 'light';
-      /** @type {HTMLElement | null} */
-      const sun = /** @type {HTMLElement | null} */ (btn.querySelector('.theme-sun'));
-      /** @type {HTMLElement | null} */
-      const moon = /** @type {HTMLElement | null} */ (btn.querySelector('.theme-moon'));
+      
+      const sun = btn.querySelector('.theme-sun');
+      const moon = btn.querySelector('.theme-moon');
+      
       if (!sun || !moon) return;
+      
       if (isLight) {
         sun.classList.remove('hidden');
         moon.classList.add('hidden');
@@ -58,10 +56,12 @@ import MoonIcon from './icons/Moon.astro';
 
     function setupButtons() {
       document.querySelectorAll('.theme-toggle').forEach((btn) => {
+        const button = btn as HTMLElement & { __themeBound?: boolean };
         // avoid double-binding
-        if (btn.__themeBound) return;
-        btn.__themeBound = true;
-        btn.addEventListener('click', () => {
+        if (button.__themeBound) return;
+        button.__themeBound = true;
+        
+        button.addEventListener('click', () => {
           const isLightNow = document.documentElement.classList.toggle('light');
           try {
             localStorage.setItem('theme', isLightNow ? 'light' : 'dark');
