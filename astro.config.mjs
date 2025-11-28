@@ -7,5 +7,5 @@ import sitemap from '@astrojs/sitemap';
 export default defineConfig({
   integrations: [tailwind(), sitemap()],
   adapter: vercel(),
-  site: 'https://martinginer9.github.io',
+  site: 'https://martinginer.vercel.app',
 });
