@@ -30,12 +30,14 @@ const about = site.about;
               href={about.ctas.cv}
               download
               class="inline-flex items-center gap-2 px-5 py-3 bg-primary text-primary-foreground rounded-md shadow hover:bg-primary/90 transition"
+              aria-label="Download CV"
             >
               Descargar CV
             </a>
             <button
               class="inline-flex items-center gap-2 px-5 py-3 border border-border rounded-md hover:glow-border"
               onclick={`document.querySelector('${about.ctas.contact}')?.scrollIntoView({ behavior: 'smooth' })`}
+              aria-label="Scroll to Contact Section"
             >
               Contáctame
             </button>

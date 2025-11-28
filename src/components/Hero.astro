@@ -4,6 +4,8 @@ import DownloadIcon from './icons/Download.astro';
 import GithubIcon from './icons/Github.astro';
 import LinkedinIcon from './icons/Linkedin.astro';
 import MailIcon from './icons/Mail.astro';
+import { Image } from 'astro:assets';
+import heroImage from '../assets/MartinGiner.webp';
 ---
 
 <section
@@ -46,6 +48,7 @@ import MailIcon from './icons/Mail.astro';
               type="button"
               class="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground hover:bg-primary/90 glow-border group rounded-md text-lg font-medium transition-all hover:scale-105"
               onclick="document.querySelector('#contact') && document.querySelector('#contact').scrollIntoView({ behavior: 'smooth' })"
+              aria-label="Scroll to Contact Section"
             >
               Contáctame
               <ArrowRight class="ml-2 w-5 h-5" />
@@ -55,6 +58,7 @@ import MailIcon from './icons/Mail.astro';
               href="/Martin_Giner_Navarro-CV.pdf"
               download
               class="inline-flex items-center gap-2 px-4 py-2 text-primary hover:text-primary-foreground hover:bg-primary/10 rounded-md text-base font-medium transition-colors border border-primary/20 hover:border-primary"
+              aria-label="Download CV PDF"
             >
               <DownloadIcon class="mr-2 w-4 h-4" />
               Descargar CV
@@ -70,6 +74,7 @@ import MailIcon from './icons/Mail.astro';
               target="_blank"
               rel="noopener noreferrer"
               class="w-10 h-10 rounded-full glass-card flex items-center justify-center hover:glow-border transition-all hover:scale-110 text-muted-foreground hover:text-primary"
+              aria-label="GitHub Profile"
             >
               <GithubIcon class="w-5 h-5" />
             </a>
@@ -78,12 +83,14 @@ import MailIcon from './icons/Mail.astro';
               target="_blank"
               rel="noopener noreferrer"
               class="w-10 h-10 rounded-full glass-card flex items-center justify-center hover:glow-border transition-all hover:scale-110 text-muted-foreground hover:text-primary"
+              aria-label="LinkedIn Profile"
             >
               <LinkedinIcon class="w-5 h-5" />
             </a>
             <a
               href="mailto:martinginernavarro7@gmail.com"
               class="w-10 h-10 rounded-full glass-card flex items-center justify-center hover:glow-border transition-all hover:scale-110 text-muted-foreground hover:text-primary"
+              aria-label="Email Contact"
             >
               <MailIcon class="w-5 h-5" />
             </a>
@@ -109,13 +116,12 @@ import MailIcon from './icons/Mail.astro';
             >
             </div>
 
-            <img
-              src="/MartinGiner.webp"
+            <Image
+              src={heroImage}
               alt="Martín Giner - Full Stack Developer"
               class="relative w-full object-contain z-10 hero-img-cropped"
               style="-webkit-mask-image: linear-gradient(to top, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 40%); mask-image: linear-gradient(to top, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 40%);"
-              loading="lazy"
-              decoding="async"
+              loading="eager"
             />
 
             <div
