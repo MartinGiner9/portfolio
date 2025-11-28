@@ -6,7 +6,7 @@ import MenuIcon from './icons/Menu.astro';
 
 <nav
   id="site-navbar"
-  class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-transparent py-6"
+  class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-transparent py-3 md:py-6"
 >
   <div class="container mx-auto px-4 flex items-center justify-between">
     <div class="flex items-center gap-2 text-primary font-bold text-xl">
@@ -149,14 +149,9 @@ import MenuIcon from './icons/Menu.astro';
 
     let isMenuOpen = false;
 
-    function setScrolled(scrolled: boolean) {
-      if (scrolled) {
-        navbar.classList.add('glass-card', 'py-4');
-        navbar.classList.remove('bg-transparent', 'py-6');
-      } else {
-        navbar.classList.remove('glass-card', 'py-4');
-        navbar.classList.add('bg-transparent', 'py-6');
-      }
+    function setScrolled(scrolled) {
+      // toggle a compact class instead of manipulating many classes
+      navbar.classList.toggle('navbar--compact', scrolled);
     }
 
     function onScroll() {
@@ -166,7 +161,7 @@ import MenuIcon from './icons/Menu.astro';
     window.addEventListener('scroll', onScroll);
     onScroll();
 
-    function scrollToHref(href: string | null) {
+    function scrollToHref(href) {
       if (!href) return;
       const el = document.querySelector(href);
       el && el.scrollIntoView({ behavior: 'smooth' });
@@ -187,11 +182,14 @@ import MenuIcon from './icons/Menu.astro';
       isMenuOpen = !isMenuOpen;
       if (isMenuOpen) {
         mobileMenu.classList.remove('hidden');
+        // prevent body scroll when open
+        document.body.style.overflow = 'hidden';
         // change icon to X
         mobileMenuIcon.innerHTML =
           '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />';
       } else {
         mobileMenu.classList.add('hidden');
+        document.body.style.overflow = '';
         // change icon to menu
         mobileMenuIcon.innerHTML =
           '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />';
